@@ -399,6 +399,16 @@ p {
   color: var(--white);
 }
 
+.btn-outline2 {
+  background: var(--sapphire-deep);
+  color: var(--white);
+}
+.btn-outline2:hover {
+  background: transparent;
+  color: var(--sapphire-deep);
+  border: 2px solid var(--sapphire-deep);
+}
+
 .btn-ghost {
   background: transparent;
   color: var(--sapphire-deep);
