@@ -1,7 +1,13 @@
-{
-  "redirects":  [
     {
-      "source": "/",
+  "redirects":  [
+      {
+      "source": "/payment",
+      "destination": "https://zfrmz.com/vVQw8Fwxe9vuSrdGJHfh",
+      "permanent": false
+    },
+    
+    {
+      "source": "/careers",
       "destination": "https://gtextcareer.vercel.app/",
       "permanent": false
     }
