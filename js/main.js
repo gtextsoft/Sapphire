@@ -27,6 +27,9 @@ function initMobileMenu() {
             navToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
             body.classList.toggle('no-scroll');
+            const isExpanded = navMenu.classList.contains('active');
+            navToggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+            navToggle.setAttribute('aria-label', isExpanded ? 'Close navigation' : 'Open navigation');
         });
 
         // Close menu when clicking outside
@@ -35,6 +38,8 @@ function initMobileMenu() {
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
                 body.classList.remove('no-scroll');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.setAttribute('aria-label', 'Open navigation');
             }
         });
 
@@ -45,6 +50,8 @@ function initMobileMenu() {
                 navToggle.classList.remove('active');
                 navMenu.classList.remove('active');
                 body.classList.remove('no-scroll');
+                navToggle.setAttribute('aria-expanded', 'false');
+                navToggle.setAttribute('aria-label', 'Open navigation');
             });
         });
     }
@@ -131,29 +138,16 @@ function initFormHandling() {
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            
-            // Simple validation feedback
-            const btn = contactForm.querySelector('button[type="submit"]');
-            const originalText = btn.innerText;
-            
-            btn.innerText = 'Sending...';
-            btn.disabled = true;
-            
-            // Simulate sending (replace with actual backend/API later)
-            setTimeout(() => {
-                btn.innerText = 'Message Sent!';
-                btn.classList.add('btn-success'); // Assuming you might add a success class style
-                
-                // Reset form
-                contactForm.reset();
-                
-                // Reset button after delay
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                    btn.classList.remove('btn-success');
-                }, 3000);
-            }, 1500);
+            if (!contactForm.reportValidity()) return;
+
+            const details = new FormData(contactForm);
+            const body = [...details.entries()]
+                .filter(([, value]) => value)
+                .map(([key, value]) => `${key[0].toUpperCase()}${key.slice(1)}: ${value}`)
+                .join('\n');
+            const status = document.getElementById('contactFormStatus');
+            if (status) status.textContent = 'Your email app is opening. Review the message and send it to our team.';
+            window.location.href = `mailto:info@sapphireestate.com?subject=${encodeURIComponent('Sapphire Group Estate enquiry')}&body=${encodeURIComponent(body)}`;
         });
     }
 }

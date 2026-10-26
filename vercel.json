@@ -1,4 +1,8 @@
     {
+  "rewrites": [
+    { "source": "/subscription", "destination": "/subscription/index.html" },
+    { "source": "/subscription/", "destination": "/subscription/index.html" }
+  ],
   "redirects":  [
       {
       "source": "/payment",
