@@ -28,7 +28,7 @@
       <div class="container subscription-hero-inner">
         <p class="eyebrow">Sapphire City · Gwagwalada, Abuja</p>
         <h1>Land ownership starts with a clear plan.</h1>
-        <p>Complete the subscriber details below, then review the pricing, payment schedule and terms before sending your form.</p>
+        <p>Answer a few quick questions step by step, then review the pricing, payment schedule and terms before sending your form.</p>
         <a class="btn btn-primary" href="#subscriber-form">Start subscription form</a>
       </div>
     </section>
@@ -45,48 +45,126 @@
 
       <div class="subscription-content">
         <section class="form-panel" id="subscriber-form">
-          <div class="section-heading"><span class="step-number">01</span><div><p class="eyebrow">Subscriber details</p><h2>Subscription form</h2><p>Complete the fields in block letters. Fields marked * are required.</p></div></div>
-          <div class="notice"><strong>Before you begin</strong><ul>
-            <li>Please read this form carefully before filling it in. Provide accurate information; all information supplied will be treated as confidential.</li>
-            <li>Names will appear on your title documents as filled on this form. Any subsequent alteration to your document will attract N500,000.</li>
-            <li>Filling this form without payment of a deposit does not create any obligation between subscriber(s) and the company.</li>
-            <li>The passport photo must be recent and reflect the true likeness of the applicant or an authorizing officer of the applying establishment. Write your full name on its reverse side.</li>
-          </ul></div>
+          <div class="section-heading"><span class="step-number">01</span><div><p class="eyebrow">Subscriber details</p><h2>Subscription form</h2><p>A few quick steps — about 5 minutes. Fields marked * are required, and your progress is saved on this device as you go.</p></div></div>
+
+          <div class="wizard-progress" id="wizardProgress" hidden>
+            <div class="wizard-progress-top"><span id="wizardStepLabel" aria-live="polite">Step 1 of 7</span><span id="wizardTimeLeft">About 5 min left</span></div>
+            <div class="wizard-bar" aria-hidden="true"><span id="wizardBar"></span></div>
+            <ol class="wizard-dots" id="wizardDots" aria-hidden="true"></ol>
+          </div>
+          <p class="wizard-restored" id="wizardRestored" hidden>Welcome back! We restored your earlier answers. <button type="button" id="wizardReset">Start over</button></p>
+
           <form id="subscriptionForm">
-            <fieldset><legend><span>1</span> Personal data</legend>
+            <fieldset class="wizard-step" data-title="Welcome" data-minutes="5"><legend><span>👋</span> Before you begin</legend>
+              <p class="step-intro">Welcome! You're a few steps away from owning land at Sapphire City, Gwagwalada. Here's what to know first:</p>
+              <div class="notice"><ul>
+                <li>Please read this form carefully before filling it in. Provide accurate information; all information supplied will be treated as confidential.</li>
+                <li>Names will appear on your title documents as filled on this form. Any subsequent alteration to your document will attract N500,000.</li>
+                <li>Filling this form without payment of a deposit does not create any obligation between subscriber(s) and the company.</li>
+                <li>The passport photo must be recent and reflect the true likeness of the applicant or an authorizing officer of the applying establishment. Write your full name on its reverse side.</li>
+              </ul></div>
+              <p class="step-tip">💡 Tip: keep a recent passport photo handy — you'll attach it at the end.</p>
+            </fieldset>
+
+            <fieldset class="wizard-step" data-title="About you" data-minutes="4"><legend><span>1</span> Let's start with you</legend>
+              <p class="step-intro">Please use block letters, exactly as you want them on your documents.</p>
               <div class="form-grid">
                 <label>Title<input name="title" class="form-input" autocomplete="honorific-prefix" placeholder="e.g. Mr, Mrs, Dr"></label>
                 <label>Surname *<input name="surname" class="form-input" autocomplete="family-name" required></label>
                 <label>Other names *<input name="other_names" class="form-input" autocomplete="given-name" required></label>
-                <label>Preferred name on document *<input name="document_name" class="form-input" required><small>Change of name attracts N500,000.</small></label>
+                <label>Preferred name on document *<input name="document_name" class="form-input" required><small class="field-warning">⚠️ This is the name on your title. A later change attracts N500,000.</small></label>
+                <label>Date of birth<input name="date_of_birth" class="form-input" type="date"></label>
+                <label>Nationality<input name="nationality" class="form-input" autocomplete="country-name"></label>
                 <label>Marital status<select name="marital_status" class="form-select"><option value="">Select status</option><option>Single</option><option>Married</option><option>Other</option></select></label>
                 <label>Maiden name<input name="maiden_name" class="form-input"></label>
+                <label>Religion<select name="religion" class="form-select"><option value="">Select</option><option>Christianity</option><option>Islam</option><option>Others</option></select></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="wizard-step" data-title="Address" data-minutes="4"><legend><span>2</span> <em data-greet>Great!</em> Where do you live?</legend>
+              <div class="form-grid">
                 <label>Street name<input name="street" class="form-input" autocomplete="street-address"></label>
                 <label>City<input name="city" class="form-input" autocomplete="address-level2"></label>
                 <label>State<input name="state" class="form-input" autocomplete="address-level1"></label>
                 <label>Country<input name="country" class="form-input" autocomplete="country-name"></label>
-                <label>Religion<select name="religion" class="form-select"><option value="">Select</option><option>Christianity</option><option>Islam</option><option>Others</option></select></label>
-                <label>Date of birth<input name="date_of_birth" class="form-input" type="date"></label>
-                <label>Nationality<input name="nationality" class="form-input" autocomplete="country-name"></label>
-                <label class="photo-upload">Passport photo<input name="passport_photo" type="file" accept="image/*"><small>Recent passport photograph. Attach it separately when emailing your completed form.</small></label>
+              </div>
+              <h3 class="step-subhead">Mailing address</h3>
+              <label class="toggle-card"><input type="checkbox" id="sameAddress"> <span>My mailing address is the same as my home address</span></label>
+              <div class="form-grid mt-md" id="mailingFields">
+                <label>Street name<input name="mail_street" class="form-input" autocomplete="street-address"></label><label>City<input name="mail_city" class="form-input" autocomplete="address-level2"></label><label>State<input name="mail_state" class="form-input" autocomplete="address-level1"></label>
               </div>
             </fieldset>
-            <fieldset><legend><span>2</span> Mailing address</legend><div class="form-grid">
-              <label>Street name<input name="mail_street" class="form-input" autocomplete="street-address"></label><label>City<input name="mail_city" class="form-input" autocomplete="address-level2"></label><label>State<input name="mail_state" class="form-input" autocomplete="address-level1"></label>
-              <label>Email address *<input name="email" class="form-input" type="email" autocomplete="email" required></label><label>Home number<input name="home_phone" class="form-input" type="tel" autocomplete="tel"></label><label>Mobile number *<input name="mobile" class="form-input" type="tel" autocomplete="tel" required></label>
-            </div></fieldset>
-            <fieldset><legend><span>3</span> Next of kin</legend><div class="form-grid"><label>Name<input name="kin_name" class="form-input"></label><label>Mobile<input name="kin_mobile" class="form-input" type="tel"></label><label>Email<input name="kin_email" class="form-input" type="email"></label></div></fieldset>
-            <fieldset><legend><span>4</span> Current employment details</legend><div class="form-grid">
-              <label>Employer<input name="employer" class="form-input" autocomplete="organization"></label><label>Telephone<input name="work_phone" class="form-input" type="tel"></label><label>Designation<input name="designation" class="form-input"></label>
-              <label>Street name<input name="work_street" class="form-input"></label><label>City<input name="work_city" class="form-input"></label><label>State<input name="work_state" class="form-input"></label><label>Country<input name="work_country" class="form-input"></label>
-              <div class="choice-group"><span class="choice-title">Means of identification</span><label><input type="checkbox" name="identification" value="Driver's License"> Driver’s License</label><label><input type="checkbox" name="identification" value="National ID Card"> National ID Card</label><label><input type="checkbox" name="identification" value="International Passport"> International Passport</label></div>
-            </div></fieldset>
-            <fieldset><legend><span>5</span> Purpose of purchase</legend><div class="choice-row"><label><input type="checkbox" name="purpose" value="Land Banking"> Land banking</label><label><input type="checkbox" name="purpose" value="Ready to Develop"> Ready to develop</label><label><input type="checkbox" name="purpose" value="Commercial"> Commercial</label></div><div class="form-grid mt-md"><label>Ready to develop in 0–6 months<input name="develop_0_6" type="checkbox"></label><label>Ready to develop in 6–12 months<input name="develop_6_12" type="checkbox"></label></div></fieldset>
-            <fieldset><legend><span>6</span> Payment option</legend><p class="fieldset-help">Kindly tick appropriately.</p><div class="choice-row"><label><input type="radio" name="payment_option" value="Outright" required> Outright</label><label><input type="radio" name="payment_option" value="13 Months"> 13 months</label><label><input type="radio" name="payment_option" value="36 Months"> 36 months</label></div>
-              <div class="form-grid mt-md"><label>Number of plots<input name="plots" class="form-input" type="number" min="1"></label><label>SQM<input name="sqm" class="form-input" type="number" min="1"></label><label>Payment method<select name="payment_method" class="form-select"><option value="">Select method</option><option>Online</option><option>Cheque</option><option>Transfer</option><option>Cash</option></select></label><label>Total amount payable (₦)<input name="total_amount" class="form-input" inputmode="decimal"></label><label>Subscriber signature / full name<input name="signature" class="form-input" required></label><label>Date<input name="signature_date" class="form-input" type="date"></label></div>
+
+            <fieldset class="wizard-step" data-title="Contact" data-minutes="3"><legend><span>3</span> How can we reach you?</legend>
+              <div class="form-grid">
+                <label>Email address *<input name="email" class="form-input" type="email" autocomplete="email" placeholder="name@example.com" required></label><label>Mobile number *<input name="mobile" class="form-input" type="tel" autocomplete="tel" placeholder="e.g. 0803 123 4567" required></label><label>Home number<input name="home_phone" class="form-input" type="tel" autocomplete="tel"></label>
+              </div>
+              <h3 class="step-subhead">Next of kin</h3>
+              <div class="form-grid"><label>Name<input name="kin_name" class="form-input"></label><label>Mobile<input name="kin_mobile" class="form-input" type="tel"></label><label>Email<input name="kin_email" class="form-input" type="email"></label></div>
             </fieldset>
-            <div class="form-submit"><p>When you select “Send completed form”, your email app will open with the form details addressed to Gtext Land. Attach your passport photo before sending.</p><button class="btn btn-primary btn-lg" type="submit">Send completed form <span aria-hidden="true">→</span></button><p id="formStatus" class="form-status" role="status" aria-live="polite"></p></div>
+
+            <fieldset class="wizard-step" data-title="Work & ID" data-minutes="2"><legend><span>4</span> Work &amp; identification</legend>
+              <p class="step-intro">Almost halfway there! Tell us a little about your current employment.</p>
+              <div class="form-grid">
+                <label>Employer<input name="employer" class="form-input" autocomplete="organization"></label><label>Telephone<input name="work_phone" class="form-input" type="tel"></label><label>Designation<input name="designation" class="form-input"></label>
+                <label>Street name<input name="work_street" class="form-input"></label><label>City<input name="work_city" class="form-input"></label><label>State<input name="work_state" class="form-input"></label><label>Country<input name="work_country" class="form-input"></label>
+              </div>
+              <h3 class="step-subhead">Means of identification</h3>
+              <div class="choice-cards">
+                <label class="choice-card"><input type="checkbox" name="identification" value="Driver's License"><span class="choice-icon" aria-hidden="true">🚗</span><span>Driver’s License</span></label>
+                <label class="choice-card"><input type="checkbox" name="identification" value="National ID Card"><span class="choice-icon" aria-hidden="true">🪪</span><span>National ID Card</span></label>
+                <label class="choice-card"><input type="checkbox" name="identification" value="International Passport"><span class="choice-icon" aria-hidden="true">🛂</span><span>International Passport</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="wizard-step" data-title="Your plans" data-minutes="2"><legend><span>5</span> What are your plans for the land?</legend>
+              <p class="step-intro">Pick all that apply.</p>
+              <div class="choice-cards">
+                <label class="choice-card"><input type="checkbox" name="purpose" value="Land Banking"><span class="choice-icon" aria-hidden="true">🏦</span><span>Land banking<small>Hold it and watch it grow</small></span></label>
+                <label class="choice-card"><input type="checkbox" name="purpose" value="Ready to Develop"><span class="choice-icon" aria-hidden="true">🏗️</span><span>Ready to develop<small>Build your home</small></span></label>
+                <label class="choice-card"><input type="checkbox" name="purpose" value="Commercial"><span class="choice-icon" aria-hidden="true">🏢</span><span>Commercial<small>Business or investment</small></span></label>
+              </div>
+              <h3 class="step-subhead">When would you like to build?</h3>
+              <div class="choice-cards">
+                <label class="choice-card"><input name="develop_0_6" type="checkbox"><span class="choice-icon" aria-hidden="true">⚡</span><span>Within 0–6 months</span></label>
+                <label class="choice-card"><input name="develop_6_12" type="checkbox"><span class="choice-icon" aria-hidden="true">📅</span><span>Within 6–12 months</span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="wizard-step" data-title="Payment" data-minutes="1"><legend><span>6</span> Choose how you'd like to pay</legend>
+              <div class="choice-cards">
+                <label class="choice-card"><input type="radio" name="payment_option" value="Outright" required><span class="choice-icon" aria-hidden="true">💎</span><span>Outright<small>Pay once, done</small></span></label>
+                <label class="choice-card"><input type="radio" name="payment_option" value="13 Months"><span class="choice-icon" aria-hidden="true">🗓️</span><span>13 months<small>Spread it out</small></span></label>
+                <label class="choice-card"><input type="radio" name="payment_option" value="36 Months"><span class="choice-icon" aria-hidden="true">🌱</span><span>36 months<small>Most flexible</small></span></label>
+              </div>
+              <div class="form-grid mt-md"><label>Number of plots<input name="plots" class="form-input" type="number" min="1"></label><label>SQM<input name="sqm" class="form-input" type="number" min="1"></label><label>Payment method<select name="payment_method" class="form-select"><option value="">Select method</option><option>Online</option><option>Cheque</option><option>Transfer</option><option>Cash</option></select></label><label>Total amount payable (₦)<input name="total_amount" class="form-input" inputmode="decimal"><small>Not sure? See the <a href="#pricing">land pricing</a> and <a href="#payment-plan">payment plan</a> below.</small></label></div>
+            </fieldset>
+
+            <fieldset class="wizard-step" data-title="Review" data-minutes="1"><legend><span>7</span> Last step — review &amp; sign</legend>
+              <p class="step-intro">Take a quick look. Tap <strong>Edit</strong> to change anything.</p>
+              <div class="review-list" id="reviewList"></div>
+              <div class="form-grid mt-md">
+                <label class="photo-upload">Passport photo<input name="passport_photo" type="file" accept="image/*"><small>Recent passport photograph (JPG, PNG or WEBP, max 5 MB). Attach it separately when emailing your completed form.</small></label>
+                <label>Subscriber signature / full name *<input name="signature" class="form-input" required></label><label>Date<input name="signature_date" class="form-input" type="date"></label>
+              </div>
+              <p class="form-submit-note">When you select “Send completed form”, your email app will open with the form details addressed to Gtext Land. Attach your passport photo before sending.</p>
+            </fieldset>
+
+            <div class="form-submit wizard-nav">
+              <button class="btn btn-secondary wizard-back" type="button" id="wizardBack" hidden><span aria-hidden="true">←</span> Back</button>
+              <button class="btn btn-primary btn-lg wizard-next" type="button" id="wizardNext" hidden>Let's begin <span aria-hidden="true">→</span></button>
+              <button class="btn btn-primary btn-lg" type="submit" id="wizardSubmit">Send completed form <span aria-hidden="true">→</span></button>
+              <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+            </div>
           </form>
+
+          <div class="wizard-success" id="wizardSuccess" hidden tabindex="-1">
+            <div class="success-badge" aria-hidden="true">🎉</div>
+            <h2 id="successTitle">You're almost a landowner!</h2>
+            <p>Your email app should now be open with your details addressed to <strong>info@gtextland.com</strong>. Attach your passport photo and hit send to complete your subscription.</p>
+            <p class="success-small">Email app didn't open? Send your details to <a href="mailto:info@gtextland.com">info@gtextland.com</a>, or <button type="button" id="successRetry" class="link-button">try again</button>.</p>
+            <a class="btn btn-secondary" href="#pricing">Review pricing &amp; payment plan</a>
+          </div>
         </section>
 
         <section class="info-section" id="pricing"><div class="section-heading"><span class="step-number">02</span><div><p class="eyebrow">Sapphire City, Gwagwalada</p><h2>Land pricing</h2><p>Prices supplied for residential and commercial plots.</p></div></div>
@@ -133,29 +211,6 @@
   </main>
   <footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2026 Sapphire Group Estate · <a href="/" class="footer-link">Back to main website</a> · <a href="mailto:info@gtextland.com" class="footer-link">info@gtextland.com</a></p></div></div></footer>
   <script src="/js/main.js"></script>
-  <script>
-    document.getElementById('subscriptionForm').addEventListener('submit', function (event) {
-      event.preventDefault();
-      if (!this.reportValidity()) return;
-      const formData = new FormData(this);
-      const lines = [];
-      for (const [key, value] of formData.entries()) {
-        if (key === 'passport_photo' || value instanceof File || value === 'on') continue;
-        if (value) lines.push(key.replaceAll('_', ' ') + ': ' + value);
-      }
-      const checked = (name) => [...this.querySelectorAll('[name="' + name + '"]:checked')].map(input => input.value).join(', ');
-      for (const name of ['identification', 'purpose']) {
-        const value = checked(name);
-        if (value) lines.push(name + ': ' + value);
-      }
-      for (const [name, label] of [['develop_0_6', 'Ready to develop in 0–6 months'], ['develop_6_12', 'Ready to develop in 6–12 months']]) {
-        if (this.elements[name].checked) lines.push('Development timeline: ' + label);
-      }
-      const photo = formData.get('passport_photo');
-      if (photo && photo.size) lines.push('Passport photo: Please attach the selected photo to this email.');
-      document.getElementById('formStatus').textContent = 'Your email app is opening. Attach your passport photo, if applicable, then send the message to complete your submission.';
-      window.location.href = 'mailto:info@gtextland.com?subject=' + encodeURIComponent('Sapphire City Gwagwalada Subscription Form') + '&body=' + encodeURIComponent(lines.join('\n'));
-    });
-  </script>
+  <script src="/js/subscription.js"></script>
 </body>
 </html>
